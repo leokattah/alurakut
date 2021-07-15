@@ -10,7 +10,7 @@ import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 
 function ProfileSidebar(propriedades) {
   return (
-    <Box as='aside'>
+    <Box as="aside">
       <img
         src={`https://github.com/${propriedades.githubUser}.png`}
         style={{ borderRadius: '8px' }}
@@ -30,12 +30,35 @@ function ProfileSidebar(propriedades) {
   );
 }
 
+function ProfileRelationsBox(propriedades){
+  return(
+    <ProfileRelationsBoxWrapper>
+    <h2 className="smallTitle">{propriedades.title} ({propriedades.itens.length})</h2>
+    {/* <ul>
+      {seguidores.map((itemAtual) => {
+        return (
+          <li key={itemAtual}>
+            <a href={`https://github.com/${itemAtual}.png`}>
+              <img src={itemAtual.image} />
+              <span>{itemAtual.title}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul> */}
+  </ProfileRelationsBoxWrapper>
+  )
+}
+
 export default function Home() {
-  const [comunidades, setComunidades ]= React.useState([{
-    id: '3-56-482w4',
-    title: 'Muay Thai',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg'
-  }]);
+  const [comunidades, setComunidades] = React.useState([
+    {
+      id: '3-56-482w4',
+      title: 'Muay Thai',
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg',
+    },
+  ]);
   const usuarioAleatorio = 'leokattah';
   // const comunidades =  comunidades[0];
   // const alteradorDeComunidades/setComunidades = comunidades[1];
@@ -48,13 +71,26 @@ export default function Home() {
     'felipefialho',
   ];
 
+  const [ seguidores, setSeguidores ] = React.useState([]);
+  // 1- Pegar o array de dados do github
+  //2- Criar um box que vai ter um map, baseado nos itens do array que pegamos do github.
+    React.useEffect(function() {
+      fetch('https://api.github.com/users/leokattah/followers')
+      .then(function (respostaDoServidor) {
+        return respostaDoServidor.json();
+      })
+      .then(function (respostaCompleta) {
+        setSeguidores(respostaCompleta);
+      });
+    },[])
+
   return (
     <>
       <AlurakutMenu />
       <MainGrid>
         {/* <Box style="grid-area: profileArea;"> */}
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
-          <ProfileSidebar githubUser={usuarioAleatorio} />
+          <ProfileSidebar seguidores={usuarioAleatorio} />
         </div>
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
@@ -62,27 +98,26 @@ export default function Home() {
             <OrkutNostalgicIconSet />
           </Box>
           <Box>
-            <h2 className='subTitle' >O que você deseja fazer?</h2>
+            <h2 className="subTitle">O que você deseja fazer?</h2>
             {/* A função onSubmit foi criada para previnir a renderização de toda a página quando o botão for clicado */}
-            <form onSubmit={ function handleCriaComunidade(e) {
-              e.preventDefault();
+            <form
+              onSubmit={function handleCriaComunidade(e) {
+                e.preventDefault();
 
-              // capturando os dados digitados nos inputs do form
-              const dadosDoForm = new FormData(e.target);
+                // capturando os dados digitados nos inputs do form
+                const dadosDoForm = new FormData(e.target);
 
-              const comunidade = {
-                id: new Date().toISOString(),
-                title: dadosDoForm.get('title'),
-                image: dadosDoForm.get('image'),
-              }
+                const comunidade = {
+                  id: new Date().toISOString(),
+                  title: dadosDoForm.get('title'),
+                  image: dadosDoForm.get('image'),
+                };
 
-
-
-              const comunidadesAtualizadas = [...comunidades, comunidade]
-              setComunidades(comunidadesAtualizadas)
-              // comunidades.push('alura Stars');
-
-            }} >
+                const comunidadesAtualizadas = [...comunidades, comunidade];
+                setComunidades(comunidadesAtualizadas);
+                // comunidades.push('alura Stars');
+              }}
+            >
               <div>
                 <input
                   placeholder="Qual vai ser o nome da sua comunidade?"
@@ -108,12 +143,15 @@ export default function Home() {
           style={{ gridArea: 'profileRelationsArea' }}
         >
 
+              <ProfileRelationsBox title='Seguidores' itens={seguidores} />
+
           <ProfileRelationsBoxWrapper>
-          <ul>
+            <h2 className="smallTitle">Comunidades ({comunidades.length})</h2>
+            <ul>
               {comunidades.map((itemAtual) => {
                 return (
-                  <li key = {itemAtual.id}>
-                    <a href={`/users/${itemAtual.title}`} >
+                  <li key={itemAtual.id}>
+                    <a href={`/users/${itemAtual.title}`}>
                       <img src={itemAtual.image} />
                       <span>{itemAtual.title}</span>
                     </a>
@@ -121,19 +159,17 @@ export default function Home() {
                 );
               })}
             </ul>
-            
           </ProfileRelationsBoxWrapper>
 
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
               Pessoas da comunidade ({pessoasFavoritas.length})
             </h2>
-
             <ul>
               {pessoasFavoritas.map((itemAtual) => {
                 return (
                   <li key={itemAtual}>
-                    <a href={`/users/${itemAtual}`} >
+                    <a href={`/users/${itemAtual}`}>
                       <img src={`https://github.com/${itemAtual}.png`} />
                       <span>{itemAtual}</span>
                     </a>
