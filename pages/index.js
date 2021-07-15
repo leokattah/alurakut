@@ -53,15 +53,15 @@ function ProfileRelationsBox(propriedades) {
 }
 
 export default function Home() {
-  const [comunidades, setComunidades] = React.useState([
-    {
-      id: '3-56-482w4',
-      title: 'Muay Thai',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg',
-    },
-  ]);
   const usuarioAleatorio = 'leokattah';
+  const [comunidades, setComunidades] = React.useState([]);
+  //   {
+  //     id: '3-56-482w4',
+  //     title: 'Muay Thai',
+  //     image:
+  //       'https://upload.wikimedia.org/wikipedia/commons/9/9a/Muay_Thai_Fight_Us_Vs_Burma_%2880668065%29.jpeg',
+  //   },
+  // 
   // const comunidades =  comunidades[0];
   // const alteradorDeComunidades/setComunidades = comunidades[1];
   const pessoasFavoritas = [
@@ -100,8 +100,8 @@ export default function Home() {
     body: JSON.stringify({
       'query': `query {
         allCommunities {
-          title
           id
+          title
           imageUrl
           creatorSlug
         }
@@ -138,13 +138,31 @@ export default function Home() {
                   const dadosDoForm = new FormData(e.target);
 
                   const comunidade = {
-                    id: new Date().toISOString(),
                     title: dadosDoForm.get('title'),
-                    image: dadosDoForm.get('image'),
+                    imageurl: dadosDoForm.get('image'),
+                    creatorSlug: usuarioAleatorio
                   };
 
-                  const comunidadesAtualizadas = [...comunidades, comunidade];
-                  setComunidades(comunidadesAtualizadas);
+                  fetch('api/comunidades', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(comunidade)
+                  }).then(async (response) => {
+                    const dados = await response.json();
+                    const comunidade = dados.registroCriado;
+    
+                    const comunidadesAtualizadas =
+                      [...comunidades,
+                        comunidade]
+    
+                    setComunidades(comunidadesAtualizadas);
+    
+                  })
+
+                  // const comunidadesAtualizadas = [...comunidades, comunidade];
+                  // setComunidades(comunidadesAtualizadas);
                   // comunidades.push('alura Stars');
                 }}
               >
@@ -180,8 +198,8 @@ export default function Home() {
                 {comunidades.map((itemAtual) => {
                   return (
                     <li key={itemAtual.id}>
-                      <a href={`/users/${itemAtual.title}`}>
-                        <img src={itemAtual.image} />
+                      <a href={`/comunidades/${itemAtual.id}`}>
+                        <img src={itemAtual.imageUrl} />
                         <span>{itemAtual.title}</span>
                       </a>
                     </li>
