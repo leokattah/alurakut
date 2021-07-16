@@ -1,5 +1,5 @@
 <h1 align="center"> 
-# Alurakut ✨
+Alurakut ✨
 
 Projeto desenvolvido durante a 3ª edição da Imersão React promovida pela [Alura](https://www.alura.com.br/).
 </h1>
@@ -94,8 +94,14 @@ $ yarn dev
 	
 [Website com o portfólio](https://alurakut-rho-livid.vercel.app/)
 
+ ---
  
----
+## 👩‍🏫/👨‍🏫 Instrutores
+
+- <a href="https://twitter.com/omariosouto">Mario Souto</a> <br>
+- <a href="https://twitter.com/juunegreiros">Juliana Negreiros</a> <br>
+- <a href="https://twitter.com/paulo_caelum">Paulo Silveira</a> <br>
+
 
 ## 📝 Licença
 
