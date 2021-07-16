@@ -24,10 +24,6 @@ Projeto desenvolvido durante a 3ª edição da Imersão React promovida pela [Al
 
 ## 💻 Sobre o projeto
 
-💭 Letmeask - é uma forma de você dono de live poder abrir salas para seus usuários poderem tirar duvidas.
-
-
-Projeto desenvolvido durante a **Imersão-react** oferecida pela [Alura](https://www.alura.com.br/stars).
 A aplicação foi desenvolvida em uma semana de muita prática e contribuições no Discord. Os professores deram um show de conhecimento e didática. 
 
 ---
