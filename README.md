@@ -1,13 +1,15 @@
+<h1 align="center"> 
+# Alurakut ✨
+
+Projeto desenvolvido durante a 3ª edição da Imersão React promovida pela [Alura](https://www.alura.com.br/).
+</h1>
+
 </p>
 <h1 align="center">
     <img alt="NextLevelWeek" title="#NextLevelWeek" src="src/images/capa.png" width="500px"/>
 </h1>
 
-<h4 align="center"> 
-# Alurakut ✨
 
-Projeto desenvolvido durante a 3ª edição da Imersão React promovida pela [Alura](https://www.alura.com.br/).
-</h4>
 
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
@@ -25,8 +27,8 @@ Projeto desenvolvido durante a 3ª edição da Imersão React promovida pela [Al
 💭 Letmeask - é uma forma de você dono de live poder abrir salas para seus usuários poderem tirar duvidas.
 
 
-Projeto desenvolvido durante a **NLW - Next Level Week** oferecida pela [Rocketseat](https://blog.rocketseat.com.br/primeira-next-level-week/).
-O NLW é uma experiência online com muito conteúdo prático, desafios e hacks onde o conteúdo fica disponível durante uma semana.
+Projeto desenvolvido durante a **Imersão-react** oferecida pela [Alura](https://www.alura.com.br/stars).
+A aplicação foi desenvolvida em uma semana de muita prática e contribuições no Discord. Os professores deram um show de conhecimento e didática. 
 
 ---
 
@@ -39,7 +41,7 @@ O NLW é uma experiência online com muito conteúdo prático, desafios e hacks 
 
 O layout da aplicação está disponível no Figma:
 
-<a href="https://www.figma.com/file/u0BQK8rCf2KgzcukdRRCWh/Letmeask">
+<a href="https://www.figma.com/file/EPPNOHAfWdvMWfjsHPLAIj/Alurakut?node-id=58%3A0">
   <img alt="Made by leonardo Kattah" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
 </a>
 
