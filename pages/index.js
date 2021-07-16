@@ -77,35 +77,30 @@ function ProfileRelationsList(propriedades) {
 
 export default function Home(props) {
   const usuarioAleatorio = props.githubUser;
+    // COMUNIDADES
   const [comunidades, setComunidades] = React.useState([]);
   const githubUser = 'leokattah';
-// 
-  // const pessoasFavoritas = [
-  //   'rochacbruno',
-  //   'davidbegin',
-  //   'iankury',
-  //   'dunossauro',
-  //   'ramalho',
-  //   'marcobrunodev'
-  // ];
 
+  // SEGUIDORES
   const [seguidores, setSeguidores] = React.useState([]);
 
   React.useEffect(function () {
-    fetch('https://api.github.com/users/leokattah/followers').then(
-      async function (serverResponse) {
-        const response = await serverResponse.json();
-        setSeguidores(response);
-      }
-    );
+    const urlFollowers = `https://api.github.com/users/${githubUser}/followers`
+    fetch(urlFollowers)
+       .then(function (respostaDoServidor) {
+        return respostaDoServidor.json();
+      })
+      .then(function (respostaCompleta) {
+        setSeguidores(respostaCompleta);
+      })
 
     // API GraphQL
     fetch('https://graphql.datocms.com/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: 'ef20a28c7b1eaad7bd32df6fb2eb3d',
+        'Accept': 'application/json',
+        'Authorization': 'ef20a28c7b1eaad7bd32df6fb2eb3d',
       },
       body: JSON.stringify({
         query: `query {
@@ -205,9 +200,18 @@ export default function Home(props) {
 
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context);
-  const token = cookies.USER_TOKEN;
-  const { githubUser } = jsonwebtoken.decode(token);
 
+  if (!cookies.USER_TOKEN) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+
+  const token = cookies.USER_TOKEN;
   const { isAuthenticated } = await fetch(
     'https://alurakut.vercel.app/api/auth',
     {
@@ -219,7 +223,11 @@ export async function getServerSideProps(context) {
 
   console.log('isAuthenticated: ' + isAuthenticated);
 
+  const { githubUser } = jsonwebtoken.decode(token);
+
   return {
-    props: { githubUser }
-  };
+    props: {
+      githubUser 
+    }
+  }
 }

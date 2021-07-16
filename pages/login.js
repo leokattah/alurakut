@@ -5,7 +5,7 @@ import nookies from 'nookies';
 
 export default function LoginScreen() {
   const router = useRouter();
-  const [githubUser, setGithubUser] = React.useState('leokattah');
+  const [githubUser, setGithubUser] = React.useState('');
 
   return (
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -73,7 +73,12 @@ export default function LoginScreen() {
 
         <footer className="footerArea">
           <p>
-            © 2021 alura.com.br - <a href="/">Sobre o Orkut.br</a> - <a href="/">Centro de segurança</a> - <a href="/">Privacidade</a> - <a href="/">Termos</a> - <a href="/">Contato</a>
+            © 2021 alura.com.br - 
+            <a href="/">Sobre o Orkut.br</a> - 
+            <a href="/">Centro de segurança</a> - 
+            <a href="/">Privacidade</a> - 
+            <a href="/">Termos</a> - 
+            <a href="/">Contato</a>
           </p>
         </footer>
       </div>
