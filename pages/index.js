@@ -135,7 +135,7 @@ export default function Home(props) {
 
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
-            <h1 className="title">Bem vindo (a), Leokattah!</h1>
+            <h1 className="title">Bem vindo (a),  { githubUser}</h1>
             <OrkutNostalgicIconSet />
           </Box>
 
