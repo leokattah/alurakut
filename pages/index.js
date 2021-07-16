@@ -78,7 +78,7 @@ function ProfileRelationsList(propriedades) {
 export default function Home(props) {
   const usuarioAleatorio = props.githubUser;
   const [comunidades, setComunidades] = React.useState([]);
-  // const githubUser = 'leokattah';
+  const githubUser = 'leokattah';
 // 
   // const pessoasFavoritas = [
   //   'rochacbruno',
