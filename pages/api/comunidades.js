@@ -9,7 +9,7 @@ export default async function recebedorDeRequests(request, response) {
         const registroCriado = await client.items.create({
             itemType: "968676", //Id criado pelo DATO
             ...request.body,
-            // title: "Comunidade zura",
+            // title: "Comunidade Teste",
             // imageUrl: "https://github.com/leokattah.png",
             // url: "https://github.com/leokattah"
         })
