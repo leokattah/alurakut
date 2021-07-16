@@ -144,7 +144,7 @@ export default function Home(props) {
                 const comunidade = {
                   title: dataForm.get('title'),
                   imageUrl: dataForm.get('image'),
-                  creatorSlug:  'usuarioAleatorio' ,
+                  creatorSlug:  usuarioAleatorio ,
                 };
 
                 fetch('api/comunidades', {
