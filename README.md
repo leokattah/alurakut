@@ -41,14 +41,6 @@ O layout da aplicação está disponível no Figma:
   <img alt="Made by leonardo Kattah" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
 </a>
 
-
-### Web
-
-<p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="src/images/capa.png" width="400px">
-
-</p>
-
 ---
 
 ## 🚀 Como executar o projeto
