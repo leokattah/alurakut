@@ -58,7 +58,7 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 $ gh repo clone leokattah/alurakut
 
 # Acesse a pasta do projeto no seu terminal/cmd
-$ cd letmeask
+$ cd alurakut
 
 # Instale as dependências
 $ yarn install
