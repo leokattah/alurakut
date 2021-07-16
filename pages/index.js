@@ -1,4 +1,6 @@
 import React from 'react';
+import nookies from 'nookies';
+import jsonwebtoken from 'jsonwebtoken';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
 import {
@@ -73,9 +75,19 @@ function ProfileRelationsList(propriedades) {
   );
 }
 
-export default function Home() {
+export default function Home(props) {
+  const usuarioAleatorio = props.githubUser;
   const [comunidades, setComunidades] = React.useState([]);
-  const githubUser = 'leokattah';
+  // const githubUser = 'leokattah';
+// 
+  // const pessoasFavoritas = [
+  //   'rochacbruno',
+  //   'davidbegin',
+  //   'iankury',
+  //   'dunossauro',
+  //   'ramalho',
+  //   'marcobrunodev'
+  // ];
 
   const [seguidores, setSeguidores] = React.useState([]);
 
@@ -87,6 +99,7 @@ export default function Home() {
       }
     );
 
+    // API GraphQL
     fetch('https://graphql.datocms.com/', {
       method: 'POST',
       headers: {
@@ -117,7 +130,7 @@ export default function Home() {
       <AlurakutMenu />
       <MainGrid>
         <div className="profileArea" style={{ gridArea: 'profileArea' }}>
-          <ProfileSidebar githubUser={githubUser} />
+          <ProfileSidebar githubUser={usuarioAleatorio} />
         </div>
 
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
@@ -136,7 +149,7 @@ export default function Home() {
                 const comunidade = {
                   title: dataForm.get('title'),
                   imageUrl: dataForm.get('image'),
-                  creatorSlug: githubUser,
+                  creatorSlug: { usuarioAleatorio },
                 };
 
                 fetch('api/comunidades', {
@@ -188,4 +201,25 @@ export default function Home() {
       </MainGrid>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context);
+  const token = cookies.USER_TOKEN;
+  const { githubUser } = jsonwebtoken.decode(token);
+
+  const { isAuthenticated } = await fetch(
+    'https://alurakut.vercel.app/api/auth',
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  ).then((resposta) => resposta.json());
+
+  console.log('isAuthenticated: ' + isAuthenticated);
+
+  return {
+    props: { githubUser }
+  };
 }
